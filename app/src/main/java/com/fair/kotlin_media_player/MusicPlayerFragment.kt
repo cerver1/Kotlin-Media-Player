@@ -7,119 +7,112 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.widget.SeekBar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
+import kotlinx.android.synthetic.main.fragment_music_player.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
-    private lateinit var mp: MediaPlayer
-    private var totalTime:Int = 0
+    private var mp: MediaPlayer? = null
+    private var totalTime: Int? = 0
     private var _binding: FragmentMusicPlayerBinding? = null
     private val viewBinding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMusicPlayerBinding.bind(view)
+
         mp = MediaPlayer.create(context, R.raw.premonition)
-        mp.isLooping = true
-        mp.setVolume(0.5f,0.5f)
-        totalTime = mp.duration
+        mp?.isLooping = true
+        mp?.setVolume(0.5f,0.5f)
+        totalTime = mp?.duration
 
         viewBinding.apply {
+            seekBar.max = totalTime!!
+            currentTime.text = "0 : 00"
+            remainingTime.text = "-${createTimeLabel(totalTime)}"
 
-            seekBar.max = totalTime
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                    if(p2) {
+                override fun onProgressChanged(p0: SeekBar?, progress: Int, change: Boolean) {
+                    if(change) {
                         // research better way of syncing device volume with the apps volume
-                        mp.seekTo(p1)
+                        mp?.seekTo(progress)
                     }
                 }
 
                 override fun onStartTrackingTouch(p0: SeekBar?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onStopTrackingTouch(p0: SeekBar?) {
-                    TODO("Not yet implemented")
                 }
 
             })
-
             volumeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                         if(p2) {
                             // research better way of syncing device volume with the apps volume
-                            var volumeNumber = p1/ 100.0f
-                            mp.setVolume(volumeNumber, volumeNumber)
+                            val volumeNumber = p1/ 100.0f
+                            mp?.setVolume(volumeNumber, volumeNumber)
                         }
                     }
 
                     override fun onStartTrackingTouch(p0: SeekBar?) {
-                        TODO("Not yet implemented")
                     }
 
                     override fun onStopTrackingTouch(p0: SeekBar?) {
-                        TODO("Not yet implemented")
                     }
 
                 })
 
             playFloatingActionButton.setOnClickListener {
 
-                if(mp.isPlaying) {
-                    //stop
-                    mp.pause()
-                    //set the drawable to play
-                } else {
-                    //start
-                    mp.start()
-                    //set the drawable to pause
-                }
+                    if(mp?.isPlaying!!) stop() else play()
+
 
             }
         }
 
-        Thread(Runnable{
-            while (mp != null) {
-                try {
-                    var msg = Message()
-                    msg.what = mp.currentPosition
-                    handler.sendMessage(msg)
-                    Thread.sleep(1000)
-                } catch (e: InterruptedException) {
 
+
+
+    }
+
+    private fun play(){
+        mp?.start()
+        viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_pause)
+        CoroutineScope(Dispatchers.Main).launch {
+
+            while (mp?.isPlaying!!) {
+                viewBinding.apply {
+                    val location = mp?.currentPosition!!
+                    currentTime.text = createTimeLabel(location)
+                    val remaining = createTimeLabel(totalTime?.minus(location))
+                    remainingTime.text = "-$remaining"
+                    seekBar.progress = location
+                    delay(100)
                 }
             }
-        }).start()
-
-    }
-    @SuppressLint("HandlerLeak")
-    var handler = object  : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            var currentPosition = msg.what
-
-            //update seek
-            viewBinding.seekBar.progress = currentPosition
-
-            //update labels
-            var currentTime = createTimeLabel(currentPosition)
-            viewBinding.currentTime.text = currentTime
-            var remainingTime =  createTimeLabel(totalTime - currentPosition)
-            viewBinding.currentTime.text = "-$remainingTime"
         }
     }
+    private fun stop(){
+        viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_play)
+        mp?.pause()
+    }
 
-    fun createTimeLabel(time: Int): String {
-        var timelabel = ""
-        var min = time/ 100/ 60
-        var sec = time / 1000 % 60
-        timelabel = "$min"
-        if (sec < 10) timelabel += "0"
-        timelabel += sec
-
-        return timelabel
+    private fun createTimeLabel(time: Int?): String {
+        val min = (time?.div(1000)?.div(60))
+        val sec = (time?.div(1000))?.rem(60)
+        val secs = if (sec.toString().length == 1) "0$sec" else sec.toString()
+        return if (sec != null) {
+            if (sec < 1) "$min : 00"
+            else "$min : $secs"
+        } else "0 : 00"
     }
 
     override fun onDestroyView() {

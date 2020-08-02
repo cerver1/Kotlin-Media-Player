@@ -1,6 +1,9 @@
 package com.fair.kotlin_media_player
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.media.AudioManager
+import android.media.AudioManager.*
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -24,9 +27,14 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
     private var _binding: FragmentMusicPlayerBinding? = null
     private val viewBinding get() = _binding!!
 
+    private lateinit var audio : AudioManager
+    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMusicPlayerBinding.bind(view)
+
+        audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         mp = MediaPlayer.create(context, R.raw.premonition)
         mp?.isLooping = true
@@ -37,11 +45,12 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             seekBar.max = totalTime!!
             currentTime.text = "0 : 00"
             remainingTime.text = "-${createTimeLabel(totalTime)}"
-
+            volumeBar.max = audio.getStreamMaxVolume(STREAM_MUSIC)
+            volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+            
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, progress: Int, change: Boolean) {
                     if(change) {
-                        // research better way of syncing device volume with the apps volume
                         mp?.seekTo(progress)
                     }
                 }
@@ -53,22 +62,18 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                 }
 
             })
-            volumeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-                    override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                        if(p2) {
-                            // research better way of syncing device volume with the apps volume
-                            val volumeNumber = p1/ 100.0f
-                            mp?.setVolume(volumeNumber, volumeNumber)
-                        }
-                    }
+            volumeUp.apply {
 
-                    override fun onStartTrackingTouch(p0: SeekBar?) {
-                    }
+                setOnClickListener {
+                    audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_RAISE, FLAG_PLAY_SOUND)
+                    volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+                }
 
-                    override fun onStopTrackingTouch(p0: SeekBar?) {
-                    }
-
-                })
+            }
+            volumeDown.setOnClickListener {
+                audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_LOWER, FLAG_PLAY_SOUND)
+                volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+            }
 
             playFloatingActionButton.setOnClickListener {
 
@@ -113,6 +118,14 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             if (sec < 1) "$min : 00"
             else "$min : $secs"
         } else "0 : 00"
+    }
+
+    fun AudioManager.setMediaVolume(volumeIndex: Int) {
+        this.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            volumeIndex,
+            AudioManager.FLAG_SHOW_UI
+        )
     }
 
     override fun onDestroyView() {

@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/guideline"
                 app:layout_constraintBottom_toBottomOf="@id/guideline"
+                android:textColor="@android:color/holo_red_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/seekBar"
@@ -84,6 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_forward_30"
+                    app:maxImageSize="36dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -95,6 +97,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_play"
+                    app:fabCustomSize="96dp"
+                    app:maxImageSize="70dp"
                     app:layout_constraintBottom_toBottomOf="@+id/forwardFloatingActionButton"
                     app:layout_constraintEnd_toStartOf="@+id/forwardFloatingActionButton"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -106,42 +110,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_replay_30"
+                    app:maxImageSize="36dp"
                     app:layout_constraintBottom_toBottomOf="@+id/playFloatingActionButton"
                     app:layout_constraintEnd_toStartOf="@+id/playFloatingActionButton"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/playFloatingActionButton" />
 
-                <SeekBar
+                <ProgressBar
                     android:id="@+id/volumeBar"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    style="?android:attr/progressBarStyleHorizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/volumeDown"
+                    app:layout_constraintEnd_toStartOf="@+id/volumeUp"
+                    app:layout_constraintStart_toEndOf="@+id/volumeDown"
+                    app:layout_constraintTop_toTopOf="@+id/volumeDown" />
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/volumeDown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_down"
+                    app:fabSize="mini"
                     app:layout_constraintEnd_toStartOf="@+id/volumeBar"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias=".9"/>
 
-                <ImageView
-                    android:id="@+id/imageView2"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/volumeUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up"
+                    app:fabSize="mini"
                     app:layout_constraintBottom_toBottomOf="@+id/volumeBar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/volumeBar"
                     app:layout_constraintTop_toTopOf="@+id/volumeBar" />
 

@@ -1,7 +1,12 @@
 package com.fair.kotlin_media_player
 
+import android.Manifest
+import android.Manifest.permission.*
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
+import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.AudioManager
 import android.media.AudioManager.*
 import android.media.MediaPlayer
@@ -11,6 +16,9 @@ import android.os.Message
 import android.view.View
 import android.widget.SeekBar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
 import kotlinx.android.synthetic.main.fragment_music_player.*
@@ -28,7 +36,8 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
     private val viewBinding get() = _binding!!
 
     private lateinit var audio : AudioManager
-    
+    private var visualID : Int? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,10 +45,18 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
         audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
+        if (checkSelfPermission(requireContext(), RECORD_AUDIO) != PERMISSION_GRANTED){
+                val permissions = arrayOf(RECORD_AUDIO)
+                requestPermissions(permissions,0)
+        }
+
+
+
         mp = MediaPlayer.create(context, R.raw.premonition)
         mp?.isLooping = true
         mp?.setVolume(0.5f,0.5f)
         totalTime = mp?.duration
+        visualID = mp?.audioSessionId
 
         viewBinding.apply {
             seekBar.max = totalTime!!
@@ -47,7 +64,13 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             remainingTime.text = "-${createTimeLabel(totalTime)}"
             volumeBar.max = audio.getStreamMaxVolume(STREAM_MUSIC)
             volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
-            
+
+            if (visualID != -1) {
+                visualID?.let {
+                    circleVisualizerView.isDrawLine = true
+                    circleVisualizerView.setAudioSessionId(it) }
+            }
+
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, progress: Int, change: Boolean) {
                     if(change) {
@@ -109,7 +132,6 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_play)
         mp?.pause()
     }
-
     private fun createTimeLabel(time: Int?): String {
         val min = (time?.div(1000)?.div(60))
         val sec = (time?.div(1000))?.rem(60)
@@ -119,7 +141,6 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             else "$min : $secs"
         } else "0 : 00"
     }
-
     fun AudioManager.setMediaVolume(volumeIndex: Int) {
         this.setStreamVolume(
             AudioManager.STREAM_MUSIC,
@@ -130,6 +151,8 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewBinding.circleVisualizerView.release()
         _binding = null
+
     }
 }

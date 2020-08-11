@@ -18,9 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" >
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.gauravk.audiovisualizer.visualizer.CircleLineVisualizer
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/circleVisualizerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                custom:avDensity="0.5"
+                custom:avType="fill"
+                custom:avColor="@color/av_dark_blue"
+                custom:avSpeed="medium"
+                custom:layout_constraintTop_toTopOf="parent"
+                custom:layout_constraintStart_toStartOf="parent"
+                custom:layout_constraintEnd_toEndOf="parent"
+                custom:layout_constraintBottom_toTopOf="@id/guideline"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

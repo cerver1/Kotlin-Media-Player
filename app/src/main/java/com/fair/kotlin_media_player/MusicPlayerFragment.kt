@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -37,6 +38,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     private lateinit var audio : AudioManager
     private var visualID : Int? = null
+    private var globalLocation: Int? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,18 +94,21 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
             })
 
-
-            volumeUp.apply {
-
-                setOnClickListener {
+            volumeUp.setOnClickListener {
                     audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_RAISE, FLAG_PLAY_SOUND)
                     volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
                 }
 
-            }
             volumeDown.setOnClickListener {
                 audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_LOWER, FLAG_PLAY_SOUND)
                 volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+            }
+
+            backFloatingActionButton.setOnClickListener {
+                backThirtySeconds()
+            }
+            forwardFloatingActionButton.setOnClickListener {
+                forwardThirtySeconds()
             }
 
             playFloatingActionButton.setOnClickListener {
@@ -119,6 +124,21 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     }
 
+    private fun backThirtySeconds() {
+        CoroutineScope(Dispatchers.Main).launch {
+            if (mp?.isPlaying!!) {
+                mp?.currentPosition?.minus(30000)?.let { mp?.seekTo(it) }
+            }
+        }
+
+    }
+    private fun forwardThirtySeconds() {
+        CoroutineScope(Dispatchers.Main).launch {
+            if (mp?.isPlaying!!) {
+                mp?.currentPosition?.plus(30000)?.let { mp?.seekTo(it) }
+            }
+        }
+    }
     private fun play(){
         mp?.start()
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_pause)
@@ -149,15 +169,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             else "$min : $secs"
         } else "0 : 00"
     }
- /**
-    fun AudioManager.setMediaVolume(volumeIndex: Int) {
-        this.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            volumeIndex,
-            AudioManager.FLAG_SHOW_UI
-        )
-    }
-*/
+
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding.circleVisualizerView.release()

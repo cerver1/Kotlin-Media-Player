@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Preference
+        app:key="material_design"
+        app:title="Material Design"
+        app:icon="@drawable/ic_blur"
+        app:summary="UI design made beautiful!">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/material-components/material-components-android" />
+    </Preference>
+
+    <Preference
+        app:key="kotlin_coroutines"
+        app:title="Kotlin Coroutines"
+        app:icon="@drawable/ic_android"
+        app:summary="A library designed to make multi-threading as easy as MAIN, IO, DEFAULT, and UNCONFINED">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/Kotlin/kotlinx.coroutines" />
+    </Preference>
+
+    <Preference
+        app:key="audio_visualizer"
+        app:title="Audio Visualizer"
+        app:icon="@drawable/ic_audio_track"
+        app:summary="A fantastic library provided by GitHub user gauravk95">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:data="https://github.com/gauravk95/audio-visualizer-android" />
+    </Preference>
+
+</PreferenceScreen>

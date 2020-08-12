@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
-
+    
+    
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/musicPlayerToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:menu="@menu/menu_main"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/musicPlayerCardContainer"
@@ -15,7 +26,7 @@
         app:cardElevation="5dp"
         app:cardCornerRadius="20sp"
         app:cardBackgroundColor="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/musicPlayerToolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -103,6 +114,7 @@
                     android:src="@drawable/ic_play"
                     app:fabCustomSize="96dp"
                     app:maxImageSize="70dp"
+                    android:theme="@style/ThemeOverlay.App.FloatingActionButton"
                     app:layout_constraintBottom_toBottomOf="@+id/forwardFloatingActionButton"
                     app:layout_constraintEnd_toStartOf="@+id/forwardFloatingActionButton"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -138,6 +150,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_down"
                     app:fabSize="mini"
+                    android:theme="@style/ThemeOverlay.App.FloatingActionButton"
                     app:layout_constraintEnd_toStartOf="@+id/volumeBar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -150,6 +163,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up"
                     app:fabSize="mini"
+                    android:theme="@style/ThemeOverlay.App.FloatingActionButton"
                     app:layout_constraintBottom_toBottomOf="@+id/volumeBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/volumeBar"

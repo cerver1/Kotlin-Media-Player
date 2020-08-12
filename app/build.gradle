@@ -48,6 +48,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // ui design
+    implementation 'com.google.android.material:material:1.2.0'
+
     def nav_version = "2.3.0"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -55,6 +58,9 @@ dependencies {
 
     // audio visualizer
     implementation 'com.gauravk.audiovisualizer:audiovisualizer:0.9.2'
+
+    def preference_version = "1.1.1"
+    implementation "androidx.preference:preference-ktx:$preference_version"
 
 
 

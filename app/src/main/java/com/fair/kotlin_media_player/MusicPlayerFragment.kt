@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
 import kotlinx.android.synthetic.main.fragment_music_player.*
 import kotlinx.coroutines.CoroutineScope
@@ -72,6 +73,16 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             volumeBar.max = audio.getStreamMaxVolume(STREAM_MUSIC)
             volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
 
+            // volume controls
+            volumeUp.setOnClickListener {
+                audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_RAISE, FLAG_PLAY_SOUND)
+                volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+            }
+            volumeDown.setOnClickListener {
+                audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_LOWER, FLAG_PLAY_SOUND)
+                volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
+            }
+
             // visualizer tracking
             if (visualID != -1) {
                 visualID?.let {
@@ -79,6 +90,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                     circleVisualizerView.setAudioSessionId(it) }
             }
 
+            // progress tracking
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, progress: Int, change: Boolean) {
                     if(change) {
@@ -94,29 +106,31 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
             })
 
-            volumeUp.setOnClickListener {
-                    audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_RAISE, FLAG_PLAY_SOUND)
-                    volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
-                }
-
-            volumeDown.setOnClickListener {
-                audio.adjustStreamVolume(STREAM_MUSIC, ADJUST_LOWER, FLAG_PLAY_SOUND)
-                volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
-            }
-
             backFloatingActionButton.setOnClickListener {
                 backThirtySeconds()
             }
-            forwardFloatingActionButton.setOnClickListener {
-                forwardThirtySeconds()
-            }
-
             playFloatingActionButton.setOnClickListener {
 
                     if(mp?.isPlaying!!) stop() else play()
 
 
             }
+            forwardFloatingActionButton.setOnClickListener {
+                forwardThirtySeconds()
+            }
+
+            // navigate to the settings page
+            musicPlayerToolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_settings -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_musicPlayerFragment_to_settingsContainerFragment)
+                        true }
+
+                    else -> super.onOptionsItemSelected(item)
+                }
+            }
+
         }
 
 
@@ -149,7 +163,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                     val location = mp?.currentPosition!!
                     currentTime.text = createTimeLabel(location)
                     val remaining = createTimeLabel(totalTime?.minus(location))
-                    remainingTime.text = "-$remaining"
+                    remainingTime.text = getString(R.string.remainingTime, remaining)
                     seekBar.progress = location
                     delay(100)
                 }

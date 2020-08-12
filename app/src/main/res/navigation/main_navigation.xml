@@ -5,5 +5,17 @@
     <fragment
         android:id="@+id/musicPlayerFragment"
         android:name="com.fair.kotlin_media_player.MusicPlayerFragment"
-        android:label="MusicPlayerFragment" />
+        android:label="MusicPlayerFragment" >
+        <action
+            android:id="@+id/action_musicPlayerFragment_to_settingsContainerFragment"
+            app:destination="@id/settingsContainerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsContainerFragment"
+        android:name="com.fair.kotlin_media_player.SettingsContainerFragment"
+        android:label="SettingsContainerFragment" >
+        <action
+            android:id="@+id/action_settingsContainerFragment_to_musicPlayerFragment"
+            app:destination="@id/musicPlayerFragment" />
+    </fragment>
 </navigation>

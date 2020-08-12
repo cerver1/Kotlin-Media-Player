@@ -52,19 +52,25 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
 
 
+        // music player settings
         mp = MediaPlayer.create(context, R.raw.premonition)
         mp?.isLooping = true
-        mp?.setVolume(0.5f,0.5f)
         totalTime = mp?.duration
+
+        // audio visualizer
         visualID = mp?.audioSessionId
 
         viewBinding.apply {
+            // audio tracking
             seekBar.max = totalTime!!
-            currentTime.text = "0 : 00"
-            remainingTime.text = "-${createTimeLabel(totalTime)}"
+            currentTime.text = getString(R.string.startingTime)
+            remainingTime.text = getString(R.string.endingTime, createTimeLabel(totalTime))
+
+            // volume tracking
             volumeBar.max = audio.getStreamMaxVolume(STREAM_MUSIC)
             volumeBar.progress = audio.getStreamVolume(STREAM_MUSIC)
 
+            // visualizer tracking
             if (visualID != -1) {
                 visualID?.let {
                     circleVisualizerView.isDrawLine = true
@@ -85,6 +91,8 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                 }
 
             })
+
+
             volumeUp.apply {
 
                 setOnClickListener {
@@ -141,6 +149,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             else "$min : $secs"
         } else "0 : 00"
     }
+ /**
     fun AudioManager.setMediaVolume(volumeIndex: Int) {
         this.setStreamVolume(
             AudioManager.STREAM_MUSIC,
@@ -148,7 +157,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             AudioManager.FLAG_SHOW_UI
         )
     }
-
+*/
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding.circleVisualizerView.release()

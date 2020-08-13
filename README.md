@@ -2,10 +2,10 @@
 <h1 align="center">Kotlin-Media-Player</h1>
 
 <p align="center">
-  <img src="https://github.com/cerver1/Kotlin-Instagram-Hashtag-Randomizer/blob/master/RandomizeImg/screen%201.png" width='200'>
-  <img src="https://github.com/cerver1/Kotlin-Instagram-Hashtag-Randomizer/blob/master/RandomizeImg/screen%202.png" width='200'>
-  <img src="https://github.com/cerver1/Kotlin-Instagram-Hashtag-Randomizer/blob/master/RandomizeImg/screen%203.png" width='200'>
-  <img src="https://github.com/cerver1/Kotlin-Instagram-Hashtag-Randomizer/blob/master/RandomizeImg/screen%204.png" width='200'>
+  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
+  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
+  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
+  <img src="hhttps://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
 </p>
 
 <p align='center'>

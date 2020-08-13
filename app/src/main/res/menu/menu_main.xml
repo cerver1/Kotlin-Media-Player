@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/ic_baseline_settings_24"
+        android:icon="@drawable/ic_settings"
         app:showAsAction="always"
         android:title="" />
 

@@ -33,4 +33,16 @@
         android:data="https://github.com/gauravk95/audio-visualizer-android" />
     </Preference>
 
+    <Preference
+        app:key="audio_resource"
+        app:title="Audio_Resource"
+        app:icon="@drawable/ic_library_music"
+        app:summary="A website dedicated to providing fantastic royalty free music, definitely check them out for your development needs">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://mixkit.co/" />
+
+    </Preference>
+
+
 </PreferenceScreen>

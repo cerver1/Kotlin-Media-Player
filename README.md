@@ -27,3 +27,17 @@
 <p align='center'>
   :sun_with_face: Feel free to fork this repository and extend the capabilities of this project! :sun_with_face:
 </p>
+
+<p align='center'>
+  How to contribute?
+</p>
+<p align='center'>
+
+    Any and all contributions are welcomed, simply follow theses steps to beginning.
+    
+      1. Open a new issue 
+      2. Detail how you'd like to expand the project. 
+      
+    I will do my best to discuss the issue and either approve or request changes to the issue. 
+    
+</p>

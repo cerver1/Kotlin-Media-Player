@@ -38,6 +38,6 @@
       1. Open a new issue 
       2. Detail how you'd like to expand the project. 
       
-    I will do my best to discuss the issue and either approve or request changes to the issue. 
+    I will do my best to respond in a timely manner to discuss the issue. I will then either approve or request changes to the issue. 
     
 </p>

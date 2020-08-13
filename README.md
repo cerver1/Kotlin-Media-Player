@@ -2,10 +2,10 @@
 <h1 align="center">Kotlin-Media-Player</h1>
 
 <p align="center">
-  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%203_Audio.png" width='200'>
+  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
   <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%202_Audio.png" width='200'>
+  <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%203_Audio.png" width='200'>
   <img src="https://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%204_Audio.png" width='200'>
-  <img src="hhttps://github.com/cerver1/Kotlin-Media-Player/blob/master/screen%201_Audio.png" width='200'>
 </p>
 
 <p align='center'>

@@ -25,8 +25,5 @@
 </p>
 
 <p align='center'>
-  
-
-:sun_with_face: Feel free to fork this repository and extend the capabilities of this project! :sun_with_face:
-
+  :sun_with_face: Feel free to fork this repository and extend the capabilities of this project! :sun_with_face:
 </p>

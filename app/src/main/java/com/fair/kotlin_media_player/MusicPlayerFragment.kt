@@ -130,12 +130,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                     else -> super.onOptionsItemSelected(item)
                 }
             }
-
         }
-
-
-
-
     }
 
     private fun backThirtySeconds() {
@@ -153,6 +148,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             }
         }
     }
+
     private fun play(){
         mp?.start()
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_pause)
@@ -174,6 +170,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_play)
         mp?.pause()
     }
+
     private fun createTimeLabel(time: Int?): String {
         val min = (time?.div(1000)?.div(60))
         val sec = (time?.div(1000))?.rem(60)
@@ -186,6 +183,8 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // prevents an exception from being thrown on case that the view is destroyed while the music player, plays
+        stop()
         viewBinding.circleVisualizerView.release()
         _binding = null
 

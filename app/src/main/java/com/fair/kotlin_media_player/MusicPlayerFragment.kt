@@ -1,34 +1,22 @@
 package com.fair.kotlin_media_player
 
-import android.Manifest
 import android.Manifest.permission.*
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.AudioManager
 import android.media.AudioManager.*
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.view.View
 import android.widget.SeekBar
-import android.widget.Toast
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
-import kotlinx.android.synthetic.main.fragment_music_player.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
@@ -39,8 +27,6 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     private lateinit var audio : AudioManager
     private var visualID : Int? = null
-    private var globalLocation: Int? = null
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

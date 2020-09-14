@@ -49,24 +49,24 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
             mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
             mediaRecorder?.setOutputFile(output + "/" + "recording.3gp")
 
-            buttonStartRecording.setOnClickListener {
-                if (ContextCompat.checkSelfPermission( requireContext(),
-                       RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(),
-                        WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    val permissions = arrayOf(RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
-                    ActivityCompat.requestPermissions(requireActivity(), permissions,0)
-                } else {
-                    startRecording()
-                }
-            }
-
-            buttonStopRecording.setOnClickListener{
-                stopRecording()
-            }
-
-            buttonPauseRecording.setOnClickListener {
-                pauseRecording()
-            }
+//            buttonStartRecording.setOnClickListener {
+//                if (ContextCompat.checkSelfPermission( requireContext(),
+//                       RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(),
+//                        WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    val permissions = arrayOf(RECORD_AUDIO, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+//                    ActivityCompat.requestPermissions(requireActivity(), permissions,0)
+//                } else {
+//                    startRecording()
+//                }
+//            }
+//
+//            buttonStopRecording.setOnClickListener{
+//                stopRecording()
+//            }
+//
+//            buttonPauseRecording.setOnClickListener {
+//                pauseRecording()
+//            }
 
         }
     }
@@ -96,7 +96,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
                 Toast.makeText(context,"Stopped!", Toast.LENGTH_SHORT).show()
                 mediaRecorder?.pause()
                 recordingStopped = true
-                viewBinding.buttonPauseRecording.text = "Resume"
+                //viewBinding.buttonPauseRecording.text = "Resume"
             }else{
                 resumeRecording()
             }
@@ -109,7 +109,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
         Toast.makeText(context,"Resume!", Toast.LENGTH_SHORT).show()
         mediaRecorder?.resume()
-        viewBinding.buttonPauseRecording.text = "Pause"
+        //viewBinding.buttonPauseRecording.text = "Pause"
         recordingStopped = false
     }
 

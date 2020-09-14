@@ -9,7 +9,6 @@
         android:id="@+id/textview_sound_recorder_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sound Recorder"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

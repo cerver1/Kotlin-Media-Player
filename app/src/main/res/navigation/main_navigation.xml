@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
-    app:startDestination="@id/musicPlayerFragment">
+    app:startDestination="@id/audioRecorderFragment">
     <fragment
         android:id="@+id/musicPlayerFragment"
         android:name="com.fair.kotlin_media_player.MusicPlayerFragment"
@@ -18,4 +18,8 @@
             android:id="@+id/action_settingsContainerFragment_to_musicPlayerFragment"
             app:destination="@id/musicPlayerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/audioRecorderFragment"
+        android:name="com.fair.kotlin_media_player.AudioRecorderFragment"
+        android:label="AudioRecorderFragment" />
 </navigation>

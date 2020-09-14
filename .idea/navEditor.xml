@@ -8,13 +8,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="mainSettings">
+                  <entry key="audioRecorderFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-238" />
-                            <option name="y" value="21" />
+                            <option name="x" value="278" />
+                            <option name="y" value="624" />
                           </Point>
                         </option>
                       </LayoutPositions>

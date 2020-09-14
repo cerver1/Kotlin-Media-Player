@@ -28,6 +28,8 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     private var state: Boolean = false
     private var recordingStopped: Boolean = false
 
+    private var isRecording = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAudioRecorderBinding.bind(view)
@@ -35,13 +37,17 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
         viewBinding.apply {
 
 
-            mediaRecorder = MediaRecorder()
-            output = Environment.getExternalStorageDirectory().absolutePath + "/recording.mp3"
 
+            output = activity?.getExternalFilesDir("/")?.absolutePath
+            // add a simple date format for logging unique files
+            //Environment.getExternalStorageDirectory().absolutePath + "/"
+
+            // move initialization to on startRecording
+            mediaRecorder = MediaRecorder()
             mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            mediaRecorder?.setOutputFile(output)
+            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            mediaRecorder?.setOutputFile(output + "/" + "recording.3gp")
 
             buttonStartRecording.setOnClickListener {
                 if (ContextCompat.checkSelfPermission( requireContext(),
@@ -67,7 +73,11 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
     private fun startRecording() {
         try {
+            // start timer with possibly chronometer
+            // timer.setBase(System.elapseRealtime())
+            // timer.start()
             mediaRecorder?.prepare()
+            // may need to move outside of try
             mediaRecorder?.start()
             state = true
             Toast.makeText(context, "Recording started!", Toast.LENGTH_SHORT).show()
@@ -96,6 +106,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     @SuppressLint("RestrictedApi", "SetTextI18n")
     @TargetApi(Build.VERSION_CODES.N)
     private fun resumeRecording() {
+
         Toast.makeText(context,"Resume!", Toast.LENGTH_SHORT).show()
         mediaRecorder?.resume()
         viewBinding.buttonPauseRecording.text = "Pause"
@@ -103,14 +114,49 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     }
 
     private fun stopRecording(){
+        // start timer with possibly chronometer
+        // also a chronometer object
+        // timer.start()
         if(state){
             mediaRecorder?.stop()
             mediaRecorder?.release()
+            mediaRecorder = null
             state = false
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun onClick() {
+        if (isRecording){
+            isRecording = false
+        } else {
+            isRecording = true
+        }
+    }
+
+
+    /**
+     * RecyclerView to display audio files
+     *
+     * pathToFiles = activity.getExternalFilesDir("/").getAbsolutePath();
+     * getDirectory = File(path)
+     * allFiles = getDirectory.listFiles()
+     *
+     * onClickListener for Holder within recycler adapter to send the audio to the mediaPlayer
+     * viewModel to store and transfer files
+     *
+     * AudioListAdapter(allFiles)
+     * audioList.setFixedSize(true)
+     *
+     * // to retrieve file
+     * place within a try catch
+     * mediaPlayer.setDataSource(fileToPlay.getAbsolutePath())
+     *
+     * onStop()
+     * for preventing lifecycle conflicts
+     *
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

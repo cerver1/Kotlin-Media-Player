@@ -20,10 +20,11 @@ import kotlinx.coroutines.launch
 
 class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
-    private var mp: MediaPlayer? = null
-    private var totalTime: Int? = 0
     private var _binding: FragmentMusicPlayerBinding? = null
     private val viewBinding get() = _binding!!
+
+    private var mp: MediaPlayer? = null
+    private var totalTime: Int? = 0
 
     private lateinit var audio : AudioManager
     private var visualID : Int? = null
@@ -35,8 +36,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
         audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         if (checkSelfPermission(requireContext(), RECORD_AUDIO) != PERMISSION_GRANTED){
-                val permissions = arrayOf(RECORD_AUDIO)
-                requestPermissions(permissions,0)
+                requestPermissions(permissions, REQUEST_CODE)
         }
 
 

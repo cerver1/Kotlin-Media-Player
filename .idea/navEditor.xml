@@ -13,9 +13,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="278" />
-                            <option name="y" value="624" />
+                            <option name="x" value="43" />
+                            <option name="y" value="642" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_audioRecorderFragment_to_recordedAudioFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -31,7 +40,43 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_musicPlayerFragment_to_audioRecorderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_musicPlayerFragment_to_recordedAudioFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_musicPlayerFragment_to_settingsContainerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="recordedAudioFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="300" />
+                            <option name="y" value="663" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_recordedAudioFragment_to_audioRecorderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_recordedAudioFragment_to_musicPlayerFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

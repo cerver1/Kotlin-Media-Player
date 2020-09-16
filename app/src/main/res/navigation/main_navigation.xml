@@ -9,6 +9,12 @@
         <action
             android:id="@+id/action_musicPlayerFragment_to_settingsContainerFragment"
             app:destination="@id/settingsContainerFragment" />
+        <action
+            android:id="@+id/action_musicPlayerFragment_to_recordedAudioFragment"
+            app:destination="@id/recordedAudioFragment" />
+        <action
+            android:id="@+id/action_musicPlayerFragment_to_audioRecorderFragment"
+            app:destination="@id/audioRecorderFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsContainerFragment"
@@ -21,5 +27,20 @@
     <fragment
         android:id="@+id/audioRecorderFragment"
         android:name="com.fair.kotlin_media_player.AudioRecorderFragment"
-        android:label="AudioRecorderFragment" />
+        android:label="AudioRecorderFragment" >
+        <action
+            android:id="@+id/action_audioRecorderFragment_to_recordedAudioFragment"
+            app:destination="@id/recordedAudioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recordedAudioFragment"
+        android:name="com.fair.kotlin_media_player.RecordedAudioFragment"
+        android:label="RecordedAudioFragment" >
+        <action
+            android:id="@+id/action_recordedAudioFragment_to_musicPlayerFragment"
+            app:destination="@id/musicPlayerFragment" />
+        <action
+            android:id="@+id/action_recordedAudioFragment_to_audioRecorderFragment"
+            app:destination="@id/audioRecorderFragment" />
+    </fragment>
 </navigation>

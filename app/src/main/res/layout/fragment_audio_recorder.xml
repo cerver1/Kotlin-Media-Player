@@ -69,16 +69,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FileName"
+                    android:gravity="center"
                     app:layout_constraintBottom_toTopOf="@+id/counterDisplay"
                     app:layout_constraintEnd_toEndOf="@+id/counterDisplay"
                     app:layout_constraintStart_toStartOf="@+id/counterDisplay"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <Chronometer
                     android:id="@+id/counterDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00:00:00"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/recordFloatingActionButton"

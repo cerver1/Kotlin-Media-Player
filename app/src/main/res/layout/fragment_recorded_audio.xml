@@ -22,21 +22,18 @@
             android:layout_margin="20sp"
             app:cardElevation="5dp"
             app:cardCornerRadius="20sp"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/recordedAudioToolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@android:color/transparent">
+            app:layout_constraintEnd_toEndOf="parent">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recordedAudioRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="20dp">
-
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:padding="20dp"/>
 
 
         </com.google.android.material.card.MaterialCardView>

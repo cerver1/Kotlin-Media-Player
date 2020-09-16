@@ -11,6 +11,7 @@ import android.widget.Chronometer
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
 import java.io.IOException
 
@@ -46,6 +47,9 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
                 } else {
                     audioRecorder()
                 }
+            }
+            libraryFloatingActionButton.setOnClickListener {
+                Navigation.findNavController(view).navigate(R.id.action_audioRecorderFragment_to_recordedAudioFragment)
             }
 
         }

@@ -74,10 +74,10 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
 
 
-        totalTime = mp?.duration
+        totalTime = mp.duration
 
         // audio visualizer
-        visualID = mp?.audioSessionId
+        visualID = mp.audioSessionId
 
         viewBinding.apply {
             // audio tracking
@@ -110,7 +110,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, progress: Int, change: Boolean) {
                     if(change) {
-                        mp?.seekTo(progress)
+                        mp.seekTo(progress)
                     }
                 }
 

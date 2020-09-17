@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
@@ -21,8 +23,12 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     private val viewBinding get() = _binding!!
 
     private var mediaRecorder: MediaRecorder? = null
+    private var file : String? = null
     private var filePath: String? = null
-    // private var fileExtension: String? = null
+    private var fileExtension: String? = null
+
+    private lateinit var formatter: SimpleDateFormat
+    private lateinit var now: Date
 
     private var isRecording = false
 
@@ -36,8 +42,12 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
         viewBinding.apply {
             timer = counterDisplay
 
-            filePath = context?.getExternalFilesDir(null)?.absolutePath + "/recording.mp3"
-            // fileExtension =
+            file = context?.getExternalFilesDir(null)?.absolutePath
+            formatter = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.US)
+            now = Date()
+            fileExtension = "/recording"+ formatter.format(now) +".mp3"
+
+            filePath = file + fileExtension
 
             recordFloatingActionButton.setOnClickListener {
                 if (ContextCompat.checkSelfPermission( requireContext(), RECORD_AUDIO) !=

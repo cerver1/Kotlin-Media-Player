@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fair.kotlin_media_player.databinding.FragmentRecordedAudioBinding
 import java.io.File
@@ -31,10 +32,24 @@ class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio) {
 
         viewBinding.apply {
 
-            recordedAudioRecycler.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = _adapter
+            recordedAudioToolbar.apply {
+                setNavigationIcon(R.drawable.ic_arrow_back)
+                setNavigationOnClickListener {
+                    Navigation.findNavController(view).navigate(R.id.action_recordedAudioFragment_to_audioRecorderFragment)
+                }
             }
+
+            if (allFiles.isNotEmpty()) {
+                recordedAudioWarning.visibility = View.GONE
+                recordedAudioRecycler.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = _adapter
+                }
+            } else {
+                recordedAudioRecycler.visibility = View.GONE
+                recordedAudioWarning.visibility = View.VISIBLE
+            }
+
 
 
             /**

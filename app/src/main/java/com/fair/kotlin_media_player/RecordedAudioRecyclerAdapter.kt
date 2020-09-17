@@ -24,13 +24,13 @@ class RecordedAudioRecyclerAdapter(private var recordedAudio: List<File>, privat
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.apply {
             recyclerAudioFileName.text = recordedAudio[position].name.toString()
-            recyclerAudioFileModified.text = recordedAudio[position].lastModified().toString()
+            recyclerAudioFileModified.text = timeAgo(recordedAudio[position].lastModified())
 
             setOnClickListener {
                 model.apply {
                     audioFile.value = recordedAudio[position]
                     audioFileName.value = recordedAudio[position].name.toString()
-                    audioFileTimeStamp.value = recordedAudio[position].lastModified().toString()
+                    audioFileTimeStamp.value = timeAgo(recordedAudio[position].lastModified())
                 }
                 findNavController().navigate(R.id.action_recordedAudioFragment_to_musicPlayerFragment)
             }

@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/audioPlayerCardContainer"
+            android:id="@+id/recordedAudioCardContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="20sp"
@@ -34,6 +34,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="20dp"/>
+
+            <TextView
+                android:id="@+id/recordedAudioWarning"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="Record some Audio to see them here"
+                />
 
 
         </com.google.android.material.card.MaterialCardView>

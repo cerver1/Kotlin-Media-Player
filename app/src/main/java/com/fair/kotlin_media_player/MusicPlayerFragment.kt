@@ -80,6 +80,14 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
         visualID = mp.audioSessionId
 
         viewBinding.apply {
+
+            musicPlayerToolbar.apply {
+                setNavigationIcon(R.drawable.ic_arrow_back)
+                setNavigationOnClickListener {
+                    Navigation.findNavController(view).navigate(R.id.action_musicPlayerFragment_to_recordedAudioFragment)
+                }
+            }
+
             // audio tracking
             seekBar.max = totalTime!!
             currentTime.text = getString(R.string.startingTime)

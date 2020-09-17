@@ -20,11 +20,12 @@ class RecordedAudioRecyclerAdapter(val context: Context?, var recordedAudio: Lis
         return ViewHolder(view)
     }
 
-    override fun getItemCount( )= recordedAudio.size
+    override fun getItemCount() = recordedAudio.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.apply {
-            recyclerAudioFileName.text = recordedAudio[position].toString()
+            recyclerAudioFileName.text = recordedAudio[position].name.toString()
+            recyclerAudioFileModified.text = recordedAudio[position].lastModified().toString()
         }
     }
 

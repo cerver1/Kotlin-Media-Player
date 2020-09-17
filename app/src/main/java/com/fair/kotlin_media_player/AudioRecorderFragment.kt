@@ -6,6 +6,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Environment
+import android.os.SystemClock
 import android.view.View
 import android.widget.Chronometer
 import androidx.core.app.ActivityCompat
@@ -66,6 +67,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     }
 
     private fun startRecording() {
+        timer.base = SystemClock.elapsedRealtime()
         timer.start()
 
         mediaRecorder = MediaRecorder().apply {

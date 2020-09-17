@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"/>
 
                 <ImageButton
-                    android:id="@+id/libraryFloatingActionButton"
+                    android:id="@+id/saveFloatingActionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -106,15 +106,15 @@
                     android:src="@drawable/ic_recording_stopped"
                     android:theme="@style/ThemeOverlay.App.FloatingActionButton"
                     app:fabCustomSize="96dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/libraryFloatingActionButton"
-                    app:layout_constraintEnd_toStartOf="@+id/libraryFloatingActionButton"
+                    app:layout_constraintBottom_toBottomOf="@+id/saveFloatingActionButton"
+                    app:layout_constraintEnd_toStartOf="@+id/saveFloatingActionButton"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/saveFloatingActionButton"
-                    app:layout_constraintTop_toTopOf="@+id/libraryFloatingActionButton"
+                    app:layout_constraintStart_toEndOf="@+id/libraryFloatingActionButton"
+                    app:layout_constraintTop_toTopOf="@+id/saveFloatingActionButton"
                     app:maxImageSize="70dp" />
 
                 <ImageButton
-                    android:id="@+id/saveFloatingActionButton"
+                    android:id="@+id/libraryFloatingActionButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"

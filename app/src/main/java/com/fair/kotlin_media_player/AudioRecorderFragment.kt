@@ -1,11 +1,10 @@
 package com.fair.kotlin_media_player
 
-import android.Manifest.permission.*
-import android.content.Context
+import android.Manifest.permission.RECORD_AUDIO
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.MediaRecorder
 import android.os.Bundle
-import android.os.Environment
 import android.os.SystemClock
 import android.view.View
 import android.widget.Chronometer

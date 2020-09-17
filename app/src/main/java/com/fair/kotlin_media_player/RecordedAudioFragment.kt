@@ -2,11 +2,9 @@ package com.fair.kotlin_media_player
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.fair.kotlin_media_player.databinding.FragmentRecordedAudioBinding
 import java.io.File
 

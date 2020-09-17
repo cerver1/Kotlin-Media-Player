@@ -1,7 +1,5 @@
 package com.fair.kotlin_media_player
 
-import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

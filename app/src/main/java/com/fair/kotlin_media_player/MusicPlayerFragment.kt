@@ -127,7 +127,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             }
             playFloatingActionButton.setOnClickListener {
 
-                    if(mp?.isPlaying!!) stop() else play()
+                    if(mp.isPlaying) stop() else play()
 
 
             }
@@ -151,28 +151,28 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 
     private fun backThirtySeconds() {
         CoroutineScope(Dispatchers.Main).launch {
-            if (mp?.isPlaying!!) {
-                mp?.currentPosition?.minus(30000)?.let { mp?.seekTo(it) }
+            if (mp.isPlaying) {
+                mp.currentPosition.minus(30000).let { mp.seekTo(it) }
             }
         }
 
     }
     private fun forwardThirtySeconds() {
         CoroutineScope(Dispatchers.Main).launch {
-            if (mp?.isPlaying!!) {
-                mp?.currentPosition?.plus(30000)?.let { mp?.seekTo(it) }
+            if (mp.isPlaying) {
+                mp.currentPosition.plus(30000).let { mp.seekTo(it) }
             }
         }
     }
 
     private fun play(){
-        mp?.start()
+        mp.start()
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_pause)
         CoroutineScope(Dispatchers.Main).launch {
 
-            while (mp?.isPlaying!!) {
+            while (mp.isPlaying) {
                 viewBinding.apply {
-                    val location = mp?.currentPosition!!
+                    val location = mp.currentPosition
                     currentTime.text = createTimeLabel(location)
                     val remaining = createTimeLabel(totalTime?.minus(location))
                     remainingTime.text = getString(R.string.remainingTime, remaining)
@@ -184,7 +184,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
     }
     private fun stop(){
         viewBinding.playFloatingActionButton.setImageResource(R.drawable.ic_play)
-        mp?.pause()
+        mp.pause()
     }
 
     private fun createTimeLabel(time: Int?): String {

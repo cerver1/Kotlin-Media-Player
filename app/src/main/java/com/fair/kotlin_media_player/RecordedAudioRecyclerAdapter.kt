@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_recorded_audio.view.*
 import java.io.File
 
-class RecordedAudioRecyclerAdapter(private var recordedAudio: List<File>):
+class RecordedAudioRecyclerAdapter(private var recordedAudio: List<File>, private var model: DataTransferViewModel):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,6 +29,11 @@ class RecordedAudioRecyclerAdapter(private var recordedAudio: List<File>):
             recyclerAudioFileModified.text = recordedAudio[position].lastModified().toString()
 
             setOnClickListener {
+                model.apply {
+                    audioFile.value = recordedAudio[position]
+                    audioFileName.value = recordedAudio[position].name.toString()
+                    audioFileTimeStamp.value = recordedAudio[position].lastModified().toString()
+                }
                 findNavController().navigate(R.id.action_recordedAudioFragment_to_musicPlayerFragment)
             }
         }

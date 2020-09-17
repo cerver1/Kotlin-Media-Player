@@ -39,6 +39,15 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
                 requestPermissions(permissions, REQUEST_CODE)
         }
 
+        /**
+         *
+         * place within a try catch
+         * mediaPlayer.setDataSource(fileToPlay.getAbsolutePath())
+         *
+         * onStop()
+         * for preventing lifecycle conflicts
+         *
+         */
 
 
         // music player settings

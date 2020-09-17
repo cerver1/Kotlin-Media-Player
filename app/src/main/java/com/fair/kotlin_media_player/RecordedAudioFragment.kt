@@ -16,7 +16,7 @@ class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio) {
 
     private var pathToFiles: String? = null
     private lateinit var getDirectory: File
-    private lateinit var allFiles: List<File>
+    private lateinit var allFiles: Array<File>
 
     private lateinit var _adapter : RecordedAudioRecyclerAdapter
 
@@ -25,9 +25,9 @@ class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio) {
         _binding = FragmentRecordedAudioBinding.bind(view)
         pathToFiles = context?.getExternalFilesDir(null)?.absolutePath
         getDirectory = File(pathToFiles.toString())
-        allFiles = getDirectory.listFiles().toList()
+        allFiles = getDirectory.listFiles() as Array<File>
 
-        _adapter = RecordedAudioRecyclerAdapter(context, allFiles)
+        _adapter = RecordedAudioRecyclerAdapter(allFiles.toList())
 
         viewBinding.apply {
 

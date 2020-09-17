@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
+import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -61,6 +62,10 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
             libraryFloatingActionButton.setOnClickListener {
                 Navigation.findNavController(view).navigate(R.id.action_audioRecorderFragment_to_recordedAudioFragment)
             }
+            saveFloatingActionButton.setOnClickListener {
+                Snackbar.make(view, "Coming soon", Snackbar.LENGTH_SHORT).show()
+            }
+
 
         }
     }

@@ -81,7 +81,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
             Log.d("THISTag", mediaRecorder?.maxAmplitude.toString())
 
-            viewBinding.audioPlayerCircleVisualizerView.
+            viewBinding.audioPlayerCircleVisualizerView
 
 //            if (visualID != -1) {
 //                visualID?.let {

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import android.widget.Chronometer
 import androidx.core.app.ActivityCompat
@@ -24,6 +25,8 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     private val viewBinding get() = _binding!!
 
     private var mediaRecorder: MediaRecorder? = null
+    private var visualID : Int? = null
+
     private var file : String? = null
     private var filePath: String? = null
     private var fileExtension: String? = null
@@ -39,8 +42,9 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAudioRecorderBinding.bind(view)
 
-
         viewBinding.apply {
+
+
             timer = counterDisplay
 
             file = context?.getExternalFilesDir(null)?.absolutePath
@@ -73,6 +77,18 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     private fun startRecording() {
         timer.base = SystemClock.elapsedRealtime()
         timer.start()
+        timer.onChronometerTickListener = Chronometer.OnChronometerTickListener() {
+
+            Log.d("THISTag", mediaRecorder?.maxAmplitude.toString())
+
+            viewBinding.audioPlayerCircleVisualizerView.
+
+//            if (visualID != -1) {
+//                visualID?.let {
+//                    viewBinding.audioPlayerCircleVisualizerView.isDrawLine = true
+//                    viewBinding.audioPlayerCircleVisualizerView. }
+            
+        }
 
         mediaRecorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -120,6 +136,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewBinding.audioPlayerCircleVisualizerView.release()
         _binding = null
     }
 }

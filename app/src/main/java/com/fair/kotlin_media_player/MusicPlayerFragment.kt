@@ -7,6 +7,7 @@ import android.media.AudioManager
 import android.media.AudioManager.*
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat.checkSelfPermission
@@ -101,6 +102,7 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
             // visualizer tracking
             if (visualID != -1) {
                 visualID?.let {
+                    Log.d("THISTag", it.toString())
                     circleVisualizerView.isDrawLine = true
                     circleVisualizerView.setAudioSessionId(it) }
             }

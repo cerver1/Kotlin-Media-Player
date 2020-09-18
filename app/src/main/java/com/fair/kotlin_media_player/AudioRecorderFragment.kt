@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_audio_recorder.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,10 +38,12 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     private var isRecording = false
 
     private lateinit var timer: Chronometer
+    private lateinit var _timer: Timer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAudioRecorderBinding.bind(view)
+
 
         viewBinding.apply {
 
@@ -74,21 +77,20 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
         }
     }
 
+
     private fun startRecording() {
         timer.base = SystemClock.elapsedRealtime()
         timer.start()
-        timer.onChronometerTickListener = Chronometer.OnChronometerTickListener() {
 
-            Log.d("THISTag", mediaRecorder?.maxAmplitude.toString())
-
-            viewBinding.audioPlayerCircleVisualizerView
-
-//            if (visualID != -1) {
-//                visualID?.let {
-//                    viewBinding.audioPlayerCircleVisualizerView.isDrawLine = true
-//                    viewBinding.audioPlayerCircleVisualizerView. }
-            
-        }
+        viewBinding.audioPlayerCircleVisualizerView.recreate()
+        _timer = Timer()
+        _timer.schedule(object : TimerTask() {
+            override fun run() {
+                mediaRecorder?.maxAmplitude?.let { amp ->
+                    viewBinding.audioPlayerCircleVisualizerView.update(amp)
+                }
+            }
+        }, 0, 100)
 
         mediaRecorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -109,6 +111,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
     }
 
+
     private fun audioRecorder() {
         if(isRecording) {
             viewBinding.recordFloatingActionButton.setImageResource(R.drawable.ic_recording_stopped)
@@ -121,6 +124,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
     private fun stopRecording(){
         timer.stop()
+        _timer.cancel()
 
         mediaRecorder?.apply {
 
@@ -136,7 +140,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding.audioPlayerCircleVisualizerView.release()
+        viewBinding.audioPlayerCircleVisualizerView.recreate()
         _binding = null
     }
 }

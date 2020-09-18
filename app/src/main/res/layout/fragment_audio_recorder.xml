@@ -33,19 +33,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.gauravk.audiovisualizer.visualizer.CircleLineVisualizer
-                xmlns:custom="http://schemas.android.com/apk/res-auto"
+            <com.visualizer.amplitude.AudioRecordView
                 android:id="@+id/audioPlayerCircleVisualizerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                custom:avDensity="0.5"
-                custom:avType="fill"
-                custom:avColor="@color/colorAccent"
-                custom:avSpeed="medium"
-                custom:layout_constraintTop_toTopOf="parent"
-                custom:layout_constraintStart_toStartOf="parent"
-                custom:layout_constraintEnd_toEndOf="parent"
-                custom:layout_constraintBottom_toTopOf="@id/guideline"/>
+                app:chunkAlignTo="center"
+                app:chunkRoundedCorners="true"
+                app:chunkColor="@color/colorAccent"
+                app:chunkSoftTransition="true"
+                app:chunkSpace="2dp"
+                app:chunkWidth="3dp"
+                app:chunkMaxHeight="72dp"
+                app:chunkMinHeight="3dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/guideline"/>
 
 
             <androidx.constraintlayout.widget.Guideline

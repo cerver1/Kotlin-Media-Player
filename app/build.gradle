@@ -71,5 +71,7 @@ dependencies {
     // Kotlin
     implementation "androidx.activity:activity-ktx:1.2.0-alpha08"
 
+    implementation'com.github.Armen101:AudioRecordView:1.0.2'
+
 
 }

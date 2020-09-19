@@ -8,11 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fair.kotlin_media_player.databinding.FragmentRecordedAudioBinding
-import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.closestDI
 import org.kodein.di.instance
-import java.io.File
 
 class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio), DIAware {
 
@@ -58,7 +56,7 @@ class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio), DIAware
                         adapter = _adapter
                     }
 
-                    _adapter.recordedAudio = recordedList
+                    _adapter.recordedAudio = recordedList.sortedByDescending { it.b_audioFileTimeStamp }
                     _adapter.notifyDataSetChanged()
 
                 }

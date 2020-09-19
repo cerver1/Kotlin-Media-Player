@@ -1,13 +1,11 @@
 package com.fair.kotlin_media_player
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_recorded_audio.view.*
-import java.io.File
 
 class RecordedAudioRecyclerAdapter(var recordedAudio: List<RecordedAudioEntity>,
                                    private var model: DataTransferViewModel):

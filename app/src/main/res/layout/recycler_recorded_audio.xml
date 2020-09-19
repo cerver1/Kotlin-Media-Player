@@ -25,7 +25,6 @@
             android:id="@+id/recyclerAudioFileModified"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "New"
             android:padding="5dp"/>
 
     </LinearLayout>

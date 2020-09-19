@@ -70,7 +70,7 @@
                     android:id="@+id/audioFileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="FileName"
+                    android:text="@string/audio_recorder_filename"
                     android:gravity="center"
                     app:layout_constraintBottom_toTopOf="@+id/counterDisplay"
                     app:layout_constraintEnd_toEndOf="@+id/counterDisplay"

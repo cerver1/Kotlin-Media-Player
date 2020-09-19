@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.fair.kotlin_media_player
 
 import android.app.Application

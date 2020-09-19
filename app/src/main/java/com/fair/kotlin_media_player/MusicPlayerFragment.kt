@@ -1,6 +1,6 @@
 package com.fair.kotlin_media_player
 
-import android.Manifest.permission.*
+import android.Manifest.permission.RECORD_AUDIO
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.AudioManager
@@ -13,7 +13,6 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
 import com.google.android.material.snackbar.Snackbar
@@ -21,11 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.kodein.di.DIAware
-import org.kodein.di.android.x.closestDI
-import org.kodein.di.instance
 import java.io.File
-import java.lang.Exception
 
 class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
 

@@ -3,4 +3,6 @@
     <string name="startingTime">0 : 00</string>
     <string name="endingTime">- %1$s</string>
     <string name="remainingTime">- %1$s</string>
+    <string name="audio_recorder_filename">FileName</string>
+    <string name="audio_recorder_warning">Record some Audio to see them here</string>
 </resources>

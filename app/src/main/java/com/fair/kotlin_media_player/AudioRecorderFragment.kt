@@ -6,7 +6,6 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.View
 import android.widget.Chronometer
 import androidx.core.app.ActivityCompat
@@ -16,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_audio_recorder.*
-import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.closestDI
 import org.kodein.di.instance

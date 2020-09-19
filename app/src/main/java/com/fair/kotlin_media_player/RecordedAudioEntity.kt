@@ -1,7 +1,6 @@
 package com.fair.kotlin_media_player
 
 import androidx.annotation.NonNull
-import androidx.lifecycle.MutableLiveData
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey

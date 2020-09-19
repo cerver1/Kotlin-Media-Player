@@ -41,7 +41,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:text="Record some Audio to see them here"
+                android:text="@string/audio_recorder_warning"
+                android:visibility="gone"
                 />
 
 

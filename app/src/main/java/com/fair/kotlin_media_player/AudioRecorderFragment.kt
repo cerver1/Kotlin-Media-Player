@@ -12,21 +12,31 @@ import android.widget.Chronometer
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_audio_recorder.*
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
+import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
+class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder), DIAware {
+
+
+    override val di by closestDI()
+    private val factoryModel: RecordedAudioViewModelFactory by instance()
+    private lateinit var viewModel: RecordedAudioViewModel
 
     private var _binding: FragmentAudioRecorderBinding? = null
     private val viewBinding get() = _binding!!
 
     private var mediaRecorder: MediaRecorder? = null
-    private var visualID : Int? = null
 
     private var file : String? = null
     private var filePath: String? = null
@@ -43,6 +53,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAudioRecorderBinding.bind(view)
+        viewModel = ViewModelProvider(this, factoryModel).get(RecordedAudioViewModel::class.java)
 
 
         viewBinding.apply {
@@ -122,7 +133,7 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
         }
     }
 
-    private fun stopRecording(){
+    private fun stopRecording() {
         timer.stop()
         _timer.cancel()
 
@@ -135,8 +146,20 @@ class AudioRecorderFragment:Fragment(R.layout.fragment_audio_recorder) {
 
         mediaRecorder = null
         isRecording = false
+        viewModel.upsert(
+            RecordedAudioEntity(
+                //TODO change to dynamic name dialog
+
+                a_audioFileName = "Change to dynamic name dialog",
+                b_audioFileTimeStamp = File(filePath.toString()).lastModified(),
+                c_audioFile = filePath.toString()
+            )
+        )
 
     }
+
+
+    //TODO IF THE USER DOESN'T manually save do if for them automatically.
 
     override fun onDestroyView() {
         super.onDestroyView()

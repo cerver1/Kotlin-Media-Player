@@ -4,31 +4,35 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fair.kotlin_media_player.databinding.FragmentRecordedAudioBinding
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import java.io.File
 
-class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio) {
+class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio), DIAware {
+
+    override val di by closestDI()
+    private val factoryModel: RecordedAudioViewModelFactory by instance()
+    private lateinit var viewModel: RecordedAudioViewModel
+
+    private val _viewModel: DataTransferViewModel by activityViewModels()
 
     private var _binding: FragmentRecordedAudioBinding? = null
     private val viewBinding get() = _binding!!
 
-    private var pathToFiles: String? = null
-    private lateinit var getDirectory: File
-    private lateinit var allFiles: Array<File>
-
     private lateinit var _adapter : RecordedAudioRecyclerAdapter
-    private val _model: DataTransferViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRecordedAudioBinding.bind(view)
-        pathToFiles = context?.getExternalFilesDir(null)?.absolutePath
-        getDirectory = File(pathToFiles.toString())
-        allFiles = getDirectory.listFiles() as Array<File>
+        viewModel = ViewModelProvider(this, factoryModel).get(RecordedAudioViewModel::class.java)
+        _adapter = RecordedAudioRecyclerAdapter(listOf(), _viewModel)
 
-        _adapter = RecordedAudioRecyclerAdapter(allFiles.toList(), _model)
 
         viewBinding.apply {
 
@@ -39,40 +43,29 @@ class RecordedAudioFragment: Fragment(R.layout.fragment_recorded_audio) {
                 }
             }
 
-            if (allFiles.isNotEmpty()) {
-                recordedAudioWarning.visibility = View.GONE
-                recordedAudioRecycler.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = _adapter
+            viewModel.getAllRecorded().observe(viewLifecycleOwner, { recordedList ->
+
+                if (recordedList.isNullOrEmpty()) {
+
+                    recordedAudioRecycler.visibility = View.GONE
+                    recordedAudioWarning.visibility = View.VISIBLE
+
+                } else {
+
+                    recordedAudioWarning.visibility = View.GONE
+                    recordedAudioRecycler.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = _adapter
+                    }
+
+                    _adapter.recordedAudio = recordedList
+                    _adapter.notifyDataSetChanged()
+
                 }
-            } else {
-                recordedAudioRecycler.visibility = View.GONE
-                recordedAudioWarning.visibility = View.VISIBLE
-            }
 
 
+            })
 
-            /**
-             *
-             * RecyclerView to display audio files
-             *
-             *
-
-             *
-             * onClickListener for Holder within recycler adapter to send the audio to the mediaPlayer
-             * viewModel to store and transfer files
-             *
-             * AudioListAdapter(allFiles)
-             * audioList.setFixedSize(true)
-             *
-             * // to retrieve file
-             * place within a try catch
-             * mediaPlayer.setDataSource(fileToPlay.getAbsolutePath())
-             *
-             * onStop()
-             * for preventing lifecycle conflicts
-             *
-             */
 
         }
 

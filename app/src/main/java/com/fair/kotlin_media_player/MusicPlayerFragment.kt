@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
 import com.google.android.material.snackbar.Snackbar
@@ -20,10 +21,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import java.io.File
 import java.lang.Exception
 
 class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
+
+    private val _viewModel: DataTransferViewModel by activityViewModels()
 
     private var _binding: FragmentMusicPlayerBinding? = null
     private val viewBinding get() = _binding!!
@@ -34,7 +40,8 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
     private lateinit var audio : AudioManager
     private var visualID : Int? = null
 
-    private val _model: DataTransferViewModel by activityViewModels()
+    private var pathToFile: String? = null
+    private lateinit var getDirectory: File
     private var fileToPlay: File? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,27 +49,27 @@ class MusicPlayerFragment: Fragment(R.layout.fragment_music_player) {
         _binding = FragmentMusicPlayerBinding.bind(view)
 
         audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        fileToPlay = _model.audioFile.value
+
+        pathToFile = _viewModel.audioFile.value
+        getDirectory = File(pathToFile.toString())
+        fileToPlay = getDirectory
 
         if (checkSelfPermission(requireContext(), RECORD_AUDIO) != PERMISSION_GRANTED){
                 requestPermissions(permissions, REQUEST_CODE)
         }
 
-
-
         // music player settings
-
-            try {
-                mp = MediaPlayer().apply {
-                    setDataSource(fileToPlay?.absolutePath)
-                    prepare()
-                    isLooping = true
-                }
-            } catch (e: Exception) {
-                Snackbar.make(view, "Unable to play file", Snackbar.LENGTH_SHORT).show()
-                mp = MediaPlayer.create(context, R.raw.premonition)
-                mp.isLooping = true
+        try {
+            mp = MediaPlayer().apply {
+                setDataSource(fileToPlay?.absolutePath)
+                prepare()
+                isLooping = true
             }
+        } catch (e: Exception) {
+            Snackbar.make(view, "Unable to play file", Snackbar.LENGTH_SHORT).show()
+            mp = MediaPlayer.create(context, R.raw.premonition)
+            mp.isLooping = true
+        }
 
 
 

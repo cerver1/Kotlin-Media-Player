@@ -1,4 +1,7 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.repository
+
+import com.fair.kotlin_media_player.db.database.RecordedAudioDatabase
+import com.fair.kotlin_media_player.db.entity.RecordedAudioEntity
 
 class RecordedAudioRepository(private val database: RecordedAudioDatabase) {
 

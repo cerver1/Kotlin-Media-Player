@@ -1,4 +1,4 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.utils
 
 import java.util.*
 import java.util.concurrent.TimeUnit

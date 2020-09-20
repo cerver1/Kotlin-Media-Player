@@ -1,4 +1,4 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.db.entity
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

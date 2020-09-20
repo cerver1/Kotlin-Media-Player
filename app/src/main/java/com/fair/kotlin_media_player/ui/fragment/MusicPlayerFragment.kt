@@ -1,4 +1,4 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.ui.fragment
 
 import android.Manifest.permission.RECORD_AUDIO
 import android.content.Context
@@ -14,7 +14,11 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.fair.kotlin_media_player.viewmodel.DataTransferViewModel
+import com.fair.kotlin_media_player.R
+import com.fair.kotlin_media_player.utils.REQUEST_CODE
 import com.fair.kotlin_media_player.databinding.FragmentMusicPlayerBinding
+import com.fair.kotlin_media_player.utils.permissions
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

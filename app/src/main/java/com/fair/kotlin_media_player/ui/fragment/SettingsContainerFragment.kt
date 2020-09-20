@@ -1,9 +1,10 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.fair.kotlin_media_player.R
 import com.fair.kotlin_media_player.databinding.FragmentSettingsContainerBinding
 
 class SettingsContainerFragment: Fragment(R.layout.fragment_settings_container) {

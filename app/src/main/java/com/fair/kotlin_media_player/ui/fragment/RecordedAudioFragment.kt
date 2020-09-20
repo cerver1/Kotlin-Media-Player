@@ -1,4 +1,4 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.ui.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fair.kotlin_media_player.*
+import com.fair.kotlin_media_player.adapter.RecordedAudioRecyclerAdapter
 import com.fair.kotlin_media_player.databinding.FragmentRecordedAudioBinding
+import com.fair.kotlin_media_player.viewmodel.DataTransferViewModel
+import com.fair.kotlin_media_player.viewmodel.RecordedAudioViewModel
+import com.fair.kotlin_media_player.viewmodel.RecordedAudioViewModelFactory
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.closestDI
 import org.kodein.di.instance

@@ -35,8 +35,10 @@
 
     Any and all contributions are welcomed, simply follow theses steps to beginning.
     
-      1. Open a new issue 
-      2. Detail how you'd like to expand the project. 
+      1. Check the Projects tab to see if there is a TODO item you could help with.
+      2. Open a new issue detailing your interest in which todo item you'd like to work on
+      3. If you'd like to make changes not found in the Project tab: 
+          - Open a new issue detailing how you'd like to expand the project. 
       
     I will do my best to respond in a timely manner to discuss the issue. I will then either approve or request changes to the issue. 
     

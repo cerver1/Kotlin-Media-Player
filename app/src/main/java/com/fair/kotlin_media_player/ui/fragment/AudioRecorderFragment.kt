@@ -1,4 +1,4 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.ui.fragment
 
 import android.Manifest.permission.RECORD_AUDIO
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -13,7 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.fair.kotlin_media_player.*
 import com.fair.kotlin_media_player.databinding.FragmentAudioRecorderBinding
+import com.fair.kotlin_media_player.db.entity.RecordedAudioEntity
+import com.fair.kotlin_media_player.utils.REQUEST_CODE
+import com.fair.kotlin_media_player.utils.permissions
+import com.fair.kotlin_media_player.viewmodel.RecordedAudioViewModel
+import com.fair.kotlin_media_player.viewmodel.RecordedAudioViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.closestDI

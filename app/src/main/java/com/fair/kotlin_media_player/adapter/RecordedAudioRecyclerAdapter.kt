@@ -1,14 +1,19 @@
-package com.fair.kotlin_media_player
+package com.fair.kotlin_media_player.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.fair.kotlin_media_player.viewmodel.DataTransferViewModel
+import com.fair.kotlin_media_player.R
+import com.fair.kotlin_media_player.db.entity.RecordedAudioEntity
+import com.fair.kotlin_media_player.utils.timeAgo
 import kotlinx.android.synthetic.main.recycler_recorded_audio.view.*
 
 class RecordedAudioRecyclerAdapter(var recordedAudio: List<RecordedAudioEntity>,
-                                   private var model: DataTransferViewModel):
+                                   private var model: DataTransferViewModel
+):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -4,7 +4,7 @@
     app:startDestination="@id/audioRecorderFragment">
     <fragment
         android:id="@+id/musicPlayerFragment"
-        android:name="com.fair.kotlin_media_player.MusicPlayerFragment"
+        android:name="com.fair.kotlin_media_player.ui.fragment.MusicPlayerFragment"
         android:label="MusicPlayerFragment" >
         <action
             android:id="@+id/action_musicPlayerFragment_to_settingsContainerFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsContainerFragment"
-        android:name="com.fair.kotlin_media_player.SettingsContainerFragment"
+        android:name="com.fair.kotlin_media_player.ui.fragment.SettingsContainerFragment"
         android:label="SettingsContainerFragment" >
         <action
             android:id="@+id/action_settingsContainerFragment_to_musicPlayerFragment"
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/audioRecorderFragment"
-        android:name="com.fair.kotlin_media_player.AudioRecorderFragment"
+        android:name="com.fair.kotlin_media_player.ui.fragment.AudioRecorderFragment"
         android:label="AudioRecorderFragment" >
         <action
             android:id="@+id/action_audioRecorderFragment_to_recordedAudioFragment"
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/recordedAudioFragment"
-        android:name="com.fair.kotlin_media_player.RecordedAudioFragment"
+        android:name="com.fair.kotlin_media_player.ui.fragment.RecordedAudioFragment"
         android:label="RecordedAudioFragment" >
         <action
             android:id="@+id/action_recordedAudioFragment_to_musicPlayerFragment"
